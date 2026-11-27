@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+.cache/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# User data / secrets — NEVER commit these
+donna-data.json      # contains API keys + personal settings
+cue-data.json        # legacy settings file
+*.env
+.env*
