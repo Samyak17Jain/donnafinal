@@ -32,7 +32,7 @@
 
 % Main project title
 \ProjectTitle{%
-  Cue: Real-Time Desktop AI Copilot%
+  Donna: Real-Time Desktop AI Copilot%
 }
 
 % Subtitle or project description
@@ -84,7 +84,7 @@
 
 Modern desktop work often requires users to switch between their active application and separate AI tools to ask questions about on-screen information. During coding, studying, or working with documents, manually explaining the visible context creates friction and interrupts concentration.
 
-Cue is a desktop AI copilot designed to make assistance accessible through a floating interface. The current implementation focuses on desktop integration, screenshot capture, and asking questions about on-screen content. The longer-term goal is to extend this screen context with voice and audio from calls so that the assistant can provide more context-aware help during conversations.
+Donna is a desktop AI copilot designed to make assistance accessible through a floating interface. The current implementation focuses on desktop integration, screenshot capture, and asking questions about on-screen content. The longer-term goal is to extend this screen context with voice and audio from calls so that the assistant can provide more context-aware help during conversations.
 
 \subsection{Problem Statement}
 
@@ -108,18 +108,18 @@ The project addresses this problem by building a desktop application that can st
 
 \section{System Architecture}
 
-Cue is implemented as a desktop application. Its architecture combines a floating user interface, desktop integration, screenshot capture, and communication with an AI model. The current milestone is centered on screenshot-based and on-screen support; voice and video-call listening and context integration remain the next stage of development.
+Donna is implemented as a desktop application. Its architecture combines a floating user interface, desktop integration, screenshot capture, and communication with an AI model. The current milestone is centered on screenshot-based and on-screen support; voice and video-call listening and context integration remain the next stage of development.
 
 \subsection{High-Level Design}
 
 The current workflow is as follows:
 
 \begin{enumerate}
-  \item The user opens Cue and invokes the assistant from its desktop interface.
+  \item The user opens Donna and invokes the assistant from its desktop interface.
   \item When screen context is required, the application captures a screenshot.
   \item The user submits a question or request related to the visible content.
   \item The screenshot and request are used to construct an AI prompt.
-  \item The response is displayed through the Cue interface.
+  \item The response is displayed through the Donna interface.
 \end{enumerate}
 
 The next stage is to add voice and video-call listening context so that relevant conversation audio can be transcribed or otherwise processed and incorporated into requests. This work is not presented as completed in the current progress report.
@@ -151,11 +151,11 @@ The following items describe the current progress without treating planned funct
 \begin{itemize}
   \item \textbf{Completed:} Desktop application and floating interface.
   \item \textbf{Completed:} Screenshot capture and on-screen assistance workflow.
-  \item \textbf{Tested:} The application was run on the team's laptops during video calls and while screen recording. In these tests, the Cue window was not visible in the call/recording output.
+  \item \textbf{Tested:} The application was run on the team's laptops during video calls and while screen recording. In these tests, the Donna window was not visible in the call/recording output.
   \item \textbf{Next:} Add voice and video-call listening so the assistant can use conversation audio as context.
 \end{itemize}
 
-The screen-recording and video-call result above describes the team's observed tests on its laptops. It should not be interpreted as a guarantee that Cue will be hidden from every recording tool, operating system, or capture configuration.
+The screen-recording and video-call result above describes the team's observed tests on its laptops. It should not be interpreted as a guarantee that Donna will be hidden from every recording tool, operating system, or capture configuration.
 
 % ===== CHAPTER 3: RESULTS & EVALUATION =====
 
@@ -163,13 +163,13 @@ The screen-recording and video-call result above describes the team's observed t
 
 \section{Testing Methodology}
 
-Testing so far has focused on running the application on the team's own laptops and verifying the screenshot-based desktop workflow. The application was also tested during video calls and while screen recording to check whether the Cue window appeared in the call or recorded output.
+Testing so far has focused on running the application on the team's own laptops and verifying the screenshot-based desktop workflow. The application was also tested during video calls and while screen recording to check whether the Donna window appeared in the call or recorded output.
 
 \begin{itemize}
   \item \textbf{Functional testing:} Ran the application locally and checked the screenshot and on-screen assistance workflow.
-  \item \textbf{Video-call testing:} Ran Cue while participating in video calls and observed whether the Cue window appeared in the call output.
-  \item \textbf{Screen-recording testing:} Ran screen recording while Cue was open and checked the resulting recording for visibility of the Cue window.
-  \item \textbf{Observed result:} In the team's laptop tests, the Cue window was not visible in the video-call/recording output.
+  \item \textbf{Video-call testing:} Ran Donna while participating in video calls and observed whether the Donna window appeared in the call output.
+  \item \textbf{Screen-recording testing:} Ran screen recording while Donna was open and checked the resulting recording for visibility of the Donna window.
+  \item \textbf{Observed result:} In the team's laptop tests, the Donna window was not visible in the video-call/recording output.
   \item \textbf{Next tests:} Validate voice and video-call listening context once implemented, and repeat the visibility tests across the supported operating systems and capture applications.
 \end{itemize}
 
@@ -189,9 +189,9 @@ The current evaluation is qualitative and focuses on the completed screenshot an
   \hline
   Screenshot and on-screen support & Implemented and tested \\
   \hline
-  Visibility during tested video calls & Cue window not observed in call output \\
+  Visibility during tested video calls & Donna window not observed in call output \\
   \hline
-  Visibility during tested screen recordings & Cue window not observed in recording output \\
+  Visibility during tested screen recordings & Donna window not observed in recording output \\
   \hline
   Voice and call-audio context & Next development milestone \\
   \hline
@@ -204,7 +204,7 @@ The current evaluation is qualitative and focuses on the completed screenshot an
 
 \section{Analysis}
 
-The current milestone establishes the core desktop workflow: Cue can run on the team's laptops, capture screenshot context, and support questions about on-screen content. The team also tested the application's visibility during video calls and screen recording and did not observe the Cue window in those outputs on the tested setups.
+The current milestone establishes the core desktop workflow: Donna can run on the team's laptops, capture screenshot context, and support questions about on-screen content. The team also tested the application's visibility during video calls and screen recording and did not observe the Donna window in those outputs on the tested setups.
 
 The main remaining functional step is to incorporate voice and video-call listening context. Once that capability is implemented, it should be evaluated for transcription or context quality, response usefulness, latency, and platform-specific behavior. The visibility result should also be tested on additional operating systems and capture tools before making broader compatibility claims.
 
@@ -214,13 +214,13 @@ The main remaining functional step is to incorporate voice and video-call listen
 
 \section{Summary of Work}
 
-The project has reached the screenshot and on-screen assistance milestone. The desktop application runs on the team's laptops, and its current workflow provides a way to capture screen context and ask questions about visible content. The team has also tested the application during video calls and screen recording; in those tests, the Cue window was not visible in the resulting call or recording output.
+The project has reached the screenshot and on-screen assistance milestone. The desktop application runs on the team's laptops, and its current workflow provides a way to capture screen context and ask questions about visible content. The team has also tested the application during video calls and screen recording; in those tests, the Donna window was not visible in the resulting call or recording output.
 
 \section{Key Findings}
 
 \begin{itemize}
   \item \textbf{Core screen workflow:} Screenshot capture and on-screen assistance are the current completed functional focus.
-  \item \textbf{Initial visibility testing:} On the team's tested laptop setups, the Cue window was not observed in video-call or screen-recording output.
+  \item \textbf{Initial visibility testing:} On the team's tested laptop setups, the Donna window was not observed in video-call or screen-recording output.
   \item \textbf{Next milestone:} Voice and video-call listening context is the next development task and should be evaluated after implementation.
 \end{itemize}
 

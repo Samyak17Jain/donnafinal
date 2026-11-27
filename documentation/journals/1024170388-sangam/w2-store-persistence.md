@@ -4,7 +4,7 @@
 
 ## Error:
 
-When updating settings or API keys in the settings modal, rapid saves or app restarts occasionally resulted in empty `cue-data.json` files or parse errors:
+When updating settings or API keys in the settings modal, rapid saves or app restarts occasionally resulted in empty `donna-data.json` files or parse errors:
 `SyntaxError: Unexpected end of JSON input`. In addition, API keys were initially stored in plain text without proper file permission restrictions, and changes in the renderer were not immediately reflected in the main process LLM client without restarting the application.
 
 > Error: `SyntaxError: Unexpected end of JSON input at JSON.parse (<anonymous>)` after sudden application close or concurrent read/write.
@@ -19,7 +19,7 @@ const fs = require('fs');
 const path = require('path');
 
 function saveSettings(data) {
-  const filePath = path.join(app.getPath('userData'), 'cue-data.json');
+  const filePath = path.join(app.getPath('userData'), 'donna-data.json');
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 ```
@@ -28,7 +28,7 @@ If the user closed the application or if an asynchronous save was interrupted mi
 
 ## Key Observation
 
-1. Writing configuration directly to the target file is dangerous because file truncation occurs before data buffer flushing completes. Writing to a temporary sibling file (`cue-data.json.tmp`) followed by an atomic filesystem rename (`fs.renameSync`) ensures the original file remains intact until the new file is completely flushed.
+1. Writing configuration directly to the target file is dangerous because file truncation occurs before data buffer flushing completes. Writing to a temporary sibling file (`donna-data.json.tmp`) followed by an atomic filesystem rename (`fs.renameSync`) ensures the original file remains intact until the new file is completely flushed.
 2. In-memory settings caching must be synchronized between Main and Renderer via two-way IPC handlers (`ipcMain.handle('get-settings')` and `ipcMain.handle('save-settings')`).
 
 ## Solution
@@ -56,7 +56,7 @@ const DEFAULT_SETTINGS = {
 
 class SettingsStore {
   constructor() {
-    this.filePath = path.join(app.getPath('userData'), 'cue-data.json');
+    this.filePath = path.join(app.getPath('userData'), 'donna-data.json');
     this.tempPath = `${this.filePath}.tmp`;
     this.cache = this.load();
   }

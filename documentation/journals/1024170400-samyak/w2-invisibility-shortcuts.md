@@ -26,7 +26,7 @@ Electron's internal implementation of `setContentProtection` does not consistent
 ## Solution
 
 1. Integrate native Windows user32 call using `koffi` (or `ffi-napi`) to set `SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE)` on Windows, falling back to `setContentProtection(true)` on macOS / Linux.
-2. Add a debug escape hatch `CUE_NO_PROTECT=1` to allow developer screencasting and automated screenshot tests when needed.
+2. Add a debug escape hatch `DONNA_NO_PROTECT=1` to allow developer screencasting and automated screenshot tests when needed.
 
 ```javascript
 // src/protection.js
@@ -34,8 +34,8 @@ const { BrowserWindow } = require('electron');
 const os = require('os');
 
 function applyContentProtection(window) {
-  if (process.env.CUE_NO_PROTECT === '1') {
-    console.log('[Protection] Debug bypass enabled via CUE_NO_PROTECT=1');
+  if (process.env.DONNA_NO_PROTECT === '1') {
+    console.log('[Protection] Debug bypass enabled via DONNA_NO_PROTECT=1');
     return;
   }
 
