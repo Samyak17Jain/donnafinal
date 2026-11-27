@@ -86,7 +86,10 @@ class LocalWhisperTranscriber {
     const job = this.queueTail.then(async () => {
       if (this.discardPendingJobs) return;
       const text = await this.session.transcribe(pcm);
-      if (text) this.onTranscript(channel, text);
+      if (text) {
+        console.log(`[local-whisper] transcribed (${channel}): "${text}"`);
+        this.onTranscript(channel, text);
+      }
     });
 
     this.queueTail = job

@@ -152,3 +152,25 @@ test('falls back to the global endpoint for an unknown region', async () => {
   await llm.stream({ system: 's', turns: [{ role: 'user', text: 'hi' }], onToken: () => {} });
   assert.equal(capturedClientOptions.baseURL, 'https://api.minimax.io/v1');
 });
+
+test('normalizes Gemini model to gemini-3.5-flash for legacy model settings', () => {
+  const llm15 = createLLM({
+    provider: 'gemini',
+    apiKeys: { gemini: 'test-key' },
+    models: { gemini: { fast: 'gemini-1.5-flash', smart: 'gemini-1.5-pro' } }
+  });
+  assert.equal(llm15.model, 'gemini-3.5-flash');
+
+  const llm20 = createLLM({
+    provider: 'gemini',
+    apiKeys: { gemini: 'test-key' },
+    models: { gemini: { fast: 'gemini-2.0-flash', smart: 'gemini-2.0-flash' } }
+  });
+  assert.equal(llm20.model, 'gemini-3.5-flash');
+
+  const llmDefault = createLLM({
+    provider: 'gemini',
+    apiKeys: { gemini: 'test-key' }
+  });
+  assert.equal(llmDefault.model, 'gemini-3.5-flash');
+});

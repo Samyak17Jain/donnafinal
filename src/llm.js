@@ -7,7 +7,7 @@ const CUSTOM_PROVIDER = 'custom';
 const DEFAULT_MODELS = {
   openai: 'gpt-4o-mini',
   anthropic: 'claude-3-5-haiku-latest',
-  gemini: 'gemini-2.0-flash',
+  gemini: 'gemini-3.5-flash',
   ollama: 'llama3.2',
   groq: 'llama-3.1-8b-instant',
   minimax: 'MiniMax-M2.7',
@@ -249,8 +249,8 @@ function createLLM(settings) {
   const tier = settings.smart ? 'smart' : 'fast';
   const models = settings.models || {};
   let model = (models[provider] || {})[tier];
-  if (provider === 'gemini' && /^gemini-1\.5\-/.test(model || '')) {
-    model = 'gemini-2.0-flash';
+  if (provider === 'gemini' && /^gemini-[12]\./.test(model || '')) {
+    model = 'gemini-3.5-flash';
   }
   if (!model) model = DEFAULT_MODELS[provider] || '';
   const minimaxRegion = settings.minimaxRegion || 'global_en';

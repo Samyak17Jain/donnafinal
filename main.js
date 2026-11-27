@@ -109,6 +109,7 @@ function publishTranscript(channel, text) {
   if (!text || !text.trim()) return;
   const turn = { channel, text: text.trim(), ts: Date.now() };
   pushTranscript(turn);
+  console.log(`[donna] transcript (${channel}): "${turn.text}"`);
   send('transcript', turn);
   send('stt:final', { channel, text: turn.text });
 }
@@ -473,6 +474,7 @@ async function runFeature(mode, userText) {
   if (state.busy) return;
   const def = MODES[mode];
   if (!def) return;
+  console.log(`[donna] runFeature: mode="${mode}", userText="${userText || ''}"`);
   state.busy = true;
   let streamSettled = false; // drop stray tokens from a stream we've already abandoned
   try {

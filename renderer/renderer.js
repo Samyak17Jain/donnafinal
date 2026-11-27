@@ -864,9 +864,19 @@
           txt.textContent = txt.textContent ? txt.textContent + ' ' + text : text;
         }
       } else {
-        // Start a new row (no buttons — just clean history view)
+        // Start a new row (click to paste into input)
         const row = document.createElement('div');
         row.className = 'ts-turn ts-' + channel;
+        row.style.cursor = 'pointer';
+        row.title = 'Click to paste into input';
+        row.addEventListener('click', () => {
+          const rowText = row.querySelector('.ts-text')?.textContent || text;
+          input.value = rowText;
+          inputFromSTT = true;
+          syncPlaceholder();
+          updateSendButtonState();
+          input.focus();
+        });
 
         const chLabel = document.createElement('span');
         chLabel.className = 'ts-channel';
@@ -919,7 +929,7 @@
     // Here we only start the mic (no gesture required) and stop everything on deactivate.
     if (active) {
       startMic();
-      // Don't auto-open sidebar — user can toggle it manually
+      showSidebar();
     } else {
       stopMic();
       stopSystemAudio();
@@ -1078,6 +1088,7 @@
     aiEl.dataset.raw = message; finalizeAi(); setBusy(false);
   });
   cue.on('transcript', ({ channel, text }) => {
+    cue.log(`[transcript] (${channel}): ${text}`);
     if (!text || text.trim().length < 2 || /^[?!.,;:\-…]+$/.test(text.trim())) return;
     appendTranscriptHistoryTurn(channel, text, false);
     // Auto-fill the input box with Them (interviewer) speech
@@ -1085,8 +1096,14 @@
       cancelSoftClear(); // Interviewer is speaking, cancel any pending clear
       autoFillInputFromSTT(text);
     } else {
-      // User spoke — soft clear (don't immediately wipe, wait to see if they're really answering)
-      softClearSTTFill();
+      // User spoke
+      // If the input box is currently empty and user speech looks like a question,
+      // auto-fill the input box so the user can easily press Enter to ask Donna!
+      if (!input.value.trim() && isLikelyCompleteQuestion(text)) {
+        autoFillInputFromSTT(text);
+      } else {
+        softClearSTTFill();
+      }
     }
   });
   let statusTimer = null;
